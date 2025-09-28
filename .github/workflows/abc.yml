@@ -1,0 +1,27 @@
+name: ci,cd
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: setup docker
+        uses: docker/setup-buildx@v4
+      - name: build backend
+        run: docker compose -f docker compose.yml build backend
+      - name: build frontend
+        run: docker compose -f docker compose.yml build frontend
+      - name: run and test
+        run: docker compose -f docker compose.yml backend run npm test
+      - name: run and test
+        run: docker compose -f docker compose.yml frontend run frontend test
+        
+
+
