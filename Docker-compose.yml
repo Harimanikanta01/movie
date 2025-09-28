@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  backend:
+    build: ./nos
+    container_name: backendf
+    ports:
+      - "5000:5000"
+    networks:
+      - imgnet
+  
+  frontend:
+    build: ./my
+    container_name: frontendb
+    ports:
+      - "3000:80"
+    networks:
+      - imgnet
+networks:
+  imgnet:
+    driver: bridge
+
