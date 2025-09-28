@@ -13,7 +13,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - name: setup docker
-        uses: docker/setup-buildx@v4
+        uses: docker/setup-buildx@v2
       - name: build backend
         run: docker compose -f docker compose.yml build backend
       - name: build frontend
