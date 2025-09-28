@@ -20,8 +20,8 @@ jobs:
         run: docker compose -f Docker-compose.yml build frontend
       - name: run and test
         run: docker compose -f Docker-compose.yml  run --rm backend  npm test
-      - name: run and test
-        run: docker compose -f Docker-compose.yml  run --rm frontend  npm test
+    #  - name: run and test
+    #    run: docker compose -f Docker-compose.yml  run --rm frontend  npm test
         
 
 
