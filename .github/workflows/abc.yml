@@ -22,6 +22,16 @@ jobs:
         run: docker compose -f Docker-compose.yml  run --rm backend  npm test
     #  - name: run and test
     #    run: docker compose -f Docker-compose.yml  run --rm frontend  npm test
-        
+      - name: docker deploy
+        run: |
+          echo "${{secrets.PEMFILE}}" >> console.pem
+          chmod 400 console.pem
+      - name: docker main deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no -i console.pem ${{secrets.EC2_user}}@${{secrets.IP_config}} <<'EOF'
+          cd /home/ec2-user/FRONT
+          git pull origin main
+          docker compose up -d  --build
+          EOF
 
 
